@@ -3,9 +3,9 @@ kind: Kptfile
 metadata:
     name: jenkins-x
 upstream:
-    type: git
-    git:
-        commit: 35864bca4db4fa726920c525d570a1fc26c360c4
-        repo: https://github.com/jenkins-x/jx3-pipeline-catalog
-        directory: /packs/javascript/.lighthouse/jenkins-x
-        ref: master
+  type: git
+  git:
+    commit: 356a76be72e2b8c1981d4125a6f878e7c7d9acf8
+    repo: https://github.com/jenkins-x/jx3-pipeline-catalog
+    directory: /packs/javascript/.lighthouse/jenkins-x
+    ref: master

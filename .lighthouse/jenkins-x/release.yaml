@@ -7,29 +7,6 @@ metadata:
 spec:
   pipelineSpec:
     tasks:
-    - name: git-clone
-      image: 'gcr.io/jenkinsxio/builder-jx:2.1.142-761'
-      script: >
-        #!/usr/bin/env bash
-
-        export SUBDIR="source"
-
-        echo "git cloning url: $REPO_URL version $PULL_BASE_SHA to dir: $SUBDIR"
-
-        git config --global --add user.name ${GIT_AUTHOR_NAME:-drivenow-ci-bot}
-
-        git config --global --add user.email ${GIT_AUTHOR_EMAIL:-cameron+drivenow+ci+bot@drivenow.com.au}
-
-        git config --global credential.helper store
-
-        git clone $REPO_URL $SUBDIR
-
-        cd $SUBDIR
-
-        git checkout $PULL_BASE_SHA
-
-        echo "checked out revision: $PULL_BASE_SHA to dir: $SUBDIR"
-
     - name: from-build-pack
       resources: {}
       taskSpec:
@@ -46,6 +23,29 @@ spec:
             key: file
           workingDir: /workspace/source
         steps:
+        - name: git-clone
+          image: 'gcr.io/jenkinsxio/builder-jx:2.1.142-761'
+          script: >
+            #!/usr/bin/env bash
+
+            export SUBDIR="source"
+
+            echo "git cloning url: $REPO_URL version $PULL_BASE_SHA to dir: $SUBDIR"
+
+            git config --global --add user.name ${GIT_AUTHOR_NAME:-drivenow-ci-bot}
+
+            git config --global --add user.email ${GIT_AUTHOR_EMAIL:-cameron+drivenow+ci+bot@drivenow.com.au}
+
+            git config --global credential.helper store
+
+            git clone $REPO_URL $SUBDIR
+
+            cd $SUBDIR
+
+            git checkout $PULL_BASE_SHA
+
+            echo "checked out revision: $PULL_BASE_SHA to dir: $SUBDIR"
+
         - image: gcr.io/jenkinsxio/jx-release-version:1.0.42
           name: next-version
           resources: {}

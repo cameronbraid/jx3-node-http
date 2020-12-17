@@ -24,6 +24,7 @@ spec:
           workingDir: /workspace/source
         steps:
         - name: git-clone
+          workingDir: /workspace
           image: 'gcr.io/jenkinsxio/builder-jx:2.1.142-761'
           script: >
             #!/usr/bin/env bash
